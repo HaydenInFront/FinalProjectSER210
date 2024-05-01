@@ -20,20 +20,27 @@
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_listFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-        <action
             android:id="@+id/action_listFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_listFragmentListToEditEntryFragment"
+            app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_mapActivity"
+            app:destination="@id/mapActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.example.finalassignment.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/entryFragment"
         android:name="com.example.finalassignment.EntryFragment"
         android:label="fragment_entry"
-        tools:layout="@layout/fragment_entry" />
+        tools:layout="@layout/fragment_entry" >
+        <argument
+            android:name="journalId"
+            app:argType="integer" />
+    </fragment>
+    <activity
+        android:id="@+id/mapActivity"
+        android:name="com.example.finalassignment.MapActivity"
+        android:label="activity_map"
+        tools:layout="@layout/activity_map" />
 </navigation>

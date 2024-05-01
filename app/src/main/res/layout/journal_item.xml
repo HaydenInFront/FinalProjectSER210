@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="1dp">
+
+    <TextView
+        android:id="@+id/journalItemTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/journal_item_background"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:text="Title Placeholder"
+        android:textSize="100sp"
+        app:autoSizeMaxTextSize="200sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/journalItemLocation"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:background="@drawable/journal_item_background"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Location Placeholder"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toStartOf="@+id/journalItemBarrier"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="@+id/journalItemTitle"
+        app:layout_constraintTop_toBottomOf="@+id/journalItemTitle" />
+
+    <Space
+        android:id="@+id/journalItemBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/journalItemLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/journalItemTitle" />
+
+    <TextView
+        android:id="@+id/journalItemDate"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/journal_item_background"
+        android:gravity="center_horizontal|center_vertical"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="MM/DD/YYYY"
+        android:textSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/journalItemLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/journalItemBarrier"
+        app:layout_constraintTop_toBottomOf="@+id/journalItemTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

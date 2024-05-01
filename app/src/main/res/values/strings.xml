@@ -3,9 +3,20 @@
     <string name="menu_title1">Welcome to your</string>
     <string name="menu_title2">Travel Diary</string>
     <string name="startButtonText">Start</string>
-    <string name="addButtonText">+</string>
-    <string name="subtractButtonText">-</string>
+    <string name="addButtonText">New Entry</string>
     <string name="mapButtonText">Map</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submitButtonText">Submit</string>
+    <string name="deleteButtonText">Delete</string>
+    <string name="titleInputHint">Enter title here…</string>
+    <string name="locationInputHint">Enter location here…</string>
+    <string name="dateInputHint">Enter date here…</string>
+    <string name="entryInputHint">Enter entry here…</string>
+    <string name="titleText">Title:</string>
+    <string name="locationText">Location:</string>
+    <string name="dateText">Date:</string>
+    <string name="entryText">Entry:</string>
+    <string name="mapHeader">See your journey.</string>
+    <string name="loadingPlaceholder">Loading…</string>
+    <string name="tablename" />
+    <string name="title_activity_entry">EntryActivity</string>
 </resources>

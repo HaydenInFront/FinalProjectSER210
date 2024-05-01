@@ -2,6 +2,18 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="JournalAdapterTest">
+        <State />
+      </entry>
+      <entry key="JournalDaoTest">
+        <State />
+      </entry>
+      <entry key="JournalRoomDatabaseTest">
+        <State />
+      </entry>
+      <entry key="JournalViewModelTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

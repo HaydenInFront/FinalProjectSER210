@@ -1,90 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/listScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#636363"
+    app:layout_collapseMode="none"
     tools:context=".ListFragment">
 
-    <ImageView
-        android:id="@+id/buttonBackground"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/listLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:src="@drawable/list_border"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="#8C8C8C"
-        android:insetLeft="5dp"
-        android:insetRight="5dp"
-        android:text="+"
-        android:textSize="24sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="@+id/buttonBackground"
-        app:layout_constraintTop_toTopOf="@+id/buttonBackground" />
+        android:background="#636363">
 
-    <Button
-        android:id="@+id/subtractButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="#8C8C8C"
-        android:insetLeft="5dp"
-        android:insetRight="5dp"
-        android:text="-"
-        android:textSize="24sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@+id/addButton"
-        app:layout_constraintTop_toTopOf="@+id/buttonBackground" />
+        <ImageView
+            android:id="@+id/buttonBackground"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/list_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listToolbar" />
 
-    <Button
-        android:id="@+id/mapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:backgroundTint="#8C8C8C"
-        android:insetLeft="5dp"
-        android:insetRight="5dp"
-        android:text="Map"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonBackground"
-        app:layout_constraintTop_toTopOf="@+id/buttonBackground" />
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#8C8C8C"
+            android:insetLeft="5dp"
+            android:insetRight="5dp"
+            android:text="@string/addButtonText"
+            android:textSize="24sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="@+id/buttonBackground"
+            app:layout_constraintTop_toTopOf="@+id/buttonBackground" />
 
-    <ImageView
-        android:id="@+id/listBackground"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/list_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBackground" />
+        <Button
+            android:id="@+id/mapButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="#8C8C8C"
+            android:insetLeft="5dp"
+            android:insetRight="5dp"
+            android:text="@string/mapButtonText"
+            android:textSize="24sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/buttonBackground"
+            app:layout_constraintTop_toTopOf="@+id/buttonBackground" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/listBackground"
-        app:layout_constraintEnd_toEndOf="@+id/listBackground"
-        app:layout_constraintStart_toStartOf="@+id/listBackground"
-        app:layout_constraintTop_toTopOf="@+id/listBackground" />
+        <ImageView
+            android:id="@+id/listBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="-5dp"
+            android:layout_marginTop="-5dp"
+            android:layout_marginEnd="-5dp"
+            android:src="@drawable/list_border"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/listRecycler"
+            app:layout_constraintStart_toStartOf="@+id/listRecycler"
+            app:layout_constraintTop_toTopOf="@+id/listRecycler" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonBackground" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/listToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

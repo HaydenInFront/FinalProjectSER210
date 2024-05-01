@@ -5,32 +5,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.finalassignment.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
+
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: JournalViewModel by activityViewModels {
+        JournalViewModelFactory(
+            (activity?.application as JournalApplication).database.journalDoa()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentListBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mapButton = view.findViewById<Button>(R.id.mapButton)
-
-        mapButton.setOnClickListener {
-            view.findNavController().navigate(R.id.action_listFragment_to_mapFragment)
+        val adapter = JournalAdapter {
+            val action = ListFragmentDirections.actionListFragmentToEntryFragment(it.id)
+            view.findNavController().navigate(action)
+        }
+        binding.listRecycler.adapter = adapter
+        binding.listRecycler.layoutManager = LinearLayoutManager(this.context)
+        viewModel.allJournals.observe(viewLifecycleOwner) { items ->
+            items.let {
+                adapter.submitList(it)
+            }
         }
 
-        val addButton = view.findViewById<Button>(R.id.addButton)
+        val mapButton = binding.mapButton
+
+        mapButton.setOnClickListener {
+            view.findNavController().navigate(R.id.action_listFragment_to_mapActivity)
+        }
+
+        val addButton = binding.addButton
 
         addButton.setOnClickListener {
-            view.findNavController().navigate(R.id.action_listFragment_to_entryFragment)
+            val action = ListFragmentDirections.actionListFragmentToEntryFragment(0)
+            view.findNavController().navigate(action)
         }
     }
 }
