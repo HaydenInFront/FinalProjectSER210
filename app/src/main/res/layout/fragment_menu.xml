@@ -5,7 +5,6 @@
     android:id="@+id/constaintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3B6A0"
     tools:context=".MenuFragment">
 
     <TextView
@@ -36,7 +35,6 @@
         android:id="@+id/startButton"
         android:layout_width="125dp"
         android:layout_height="62dp"
-        android:backgroundTint="#535353"
         android:text="@string/startButtonText"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

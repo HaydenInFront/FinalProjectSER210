@@ -1,5 +1,7 @@
 package com.example.finalassignment
 
+import android.content.ContentValues.TAG
+import android.graphics.Bitmap
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,12 +13,12 @@ import com.example.finalassignment.databinding.JournalItemBinding
 import com.google.android.gms.common.api.ApiException
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import com.google.android.libraries.places.api.net.PlacesClient
 
 class JournalAdapter(private val onJournalClicked: (Journal) -> Unit): ListAdapter<Journal, JournalAdapter.JournalViewHolder>(DiffCallback) {
 
-
+    var itemClickCallback: ((Journal) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JournalViewHolder {
         return JournalViewHolder(JournalItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -32,7 +34,6 @@ class JournalAdapter(private val onJournalClicked: (Journal) -> Unit): ListAdapt
 
     class JournalViewHolder(private var binding: JournalItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-
         val apiKey = BuildConfig.PLACES_API_KEY
         init {
             Places.initialize(binding.root.context, apiKey)
@@ -41,30 +42,50 @@ class JournalAdapter(private val onJournalClicked: (Journal) -> Unit): ListAdapt
         private var placesClient = Places.createClient(binding.root.context)
         fun bind(journal: Journal) {
             val locationId = journal.location
-            val placeFields = listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
+            val placeFields = listOf(Place.Field.NAME, Place.Field.PHOTO_METADATAS)
 
             val request = FetchPlaceRequest.newInstance(locationId, placeFields)
 
             placesClient.fetchPlace(request).addOnSuccessListener { response ->
                 val place = response.place
+                val metadata = place.photoMetadatas
+
                 binding.apply {
                     journalItemTitle.text = journal.title
                     journalItemDate.text = journal.date
                     journalItemLocation.text = place.name
+                    journalItemEntry.text = journal.entry
+                }
+
+                if (metadata == null || metadata.isEmpty()) {
+                    Log.w(TAG, "No photo metadata.")
+
+                    return@addOnSuccessListener
+                }
+                val photoMetadata = metadata.first()
+                val photoRequest = photoMetadata?.let {
+                    FetchPhotoRequest.builder(it)
+                        .setMaxHeight(400)
+                        .setMaxWidth(400)
+                        .build()
+                }
+
+                var bitmap: Bitmap
+
+                placesClient.fetchPhoto(photoRequest!!).addOnSuccessListener { fetchPhotoResponse ->
+                    bitmap = fetchPhotoResponse.bitmap
+                    binding.journalItemImage.setImageBitmap(bitmap)
+
+                }.addOnFailureListener { exception ->
+                    if (exception is ApiException) {
+                        Log.e("JournalViewHolder", "Photo not found: ${exception.message}")
+                    }
                 }
             }.addOnFailureListener { exception ->
                 if (exception is ApiException) {
                     Log.e("JournalViewHolder", "Place not found: ${exception.message}")
                 }
             }
-
-
-            Log.d("JournalViewHolder", "Binding journal: $journal")
-            /*binding.apply {
-                journalItemTitle.text = journal.title
-                journalItemDate.text = journal.date
-                journalItemLocation.text = "Loading..."
-            }*/
         }
     }
 

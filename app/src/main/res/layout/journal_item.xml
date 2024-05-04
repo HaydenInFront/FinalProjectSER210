@@ -3,72 +3,146 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="1dp">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/journalItemTitle"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/titleCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/journal_item_background"
-        android:fontFamily="sans-serif-light"
-        android:gravity="center_vertical"
-        android:maxLines="1"
-        android:paddingStart="10dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="5dp"
-        android:text="Title Placeholder"
-        android:textSize="100sp"
-        app:autoSizeMaxTextSize="200sp"
-        app:autoSizeMinTextSize="1sp"
-        app:autoSizeTextType="uniform"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:outlineProvider="background"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/journalItemLocation"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:background="@drawable/journal_item_background"
-        android:gravity="center_vertical"
-        android:maxLines="1"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="Location Placeholder"
-        app:autoSizeMaxTextSize="100sp"
-        app:autoSizeMinTextSize="1sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintEnd_toStartOf="@+id/journalItemBarrier"
-        app:layout_constraintHorizontal_bias="0.76"
-        app:layout_constraintStart_toStartOf="@+id/journalItemTitle"
-        app:layout_constraintTop_toBottomOf="@+id/journalItemTitle" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Space
-        android:id="@+id/journalItemBarrier"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/journalItemLocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journalItemTitle" />
+            <TextView
+                android:id="@+id/journalItemEntry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:text="Entry Placeholder"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/journalItemDate" />
 
-    <TextView
-        android:id="@+id/journalItemDate"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/journal_item_background"
-        android:gravity="center_horizontal|center_vertical"
-        android:maxLines="1"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="MM/DD/YYYY"
-        android:textSize="30sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="@+id/journalItemLocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/journalItemBarrier"
-        app:layout_constraintTop_toBottomOf="@+id/journalItemTitle" />
+            <Space
+                android:id="@+id/space"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/journalItemTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Title Placeholder"
+                android:textSize="20sp"
+                app:autoSizeMaxTextSize="200sp"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toStartOf="@+id/space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/journalItemLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingEnd="5dp"
+                android:text="Location Placeholder"
+                android:textSize="25sp"
+                app:autoSizeMaxTextSize="100sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeStepGranularity="10sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toStartOf="@+id/space"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/journalItemTitle" />
+
+            <TextView
+                android:id="@+id/journalItemDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="35dp"
+                android:paddingEnd="5dp"
+                android:text="Date Placeholder"
+                android:textSize="15sp"
+                app:autoSizeMaxTextSize="30sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="6sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toStartOf="@+id/space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/journalItemLocation" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imageCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/space"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/journalItemImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fadingEdge="horizontal"
+                        android:fadingEdgeLength="50dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,15 +5,13 @@
     android:id="@+id/listScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#636363"
     app:layout_collapseMode="none"
     tools:context=".ListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/listLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#636363">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/buttonBackground"
@@ -22,7 +20,6 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/list_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:backgroundTint="#8C8C8C"
             android:insetLeft="5dp"
             android:insetRight="5dp"
             android:text="@string/addButtonText"
@@ -49,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:backgroundTint="#8C8C8C"
             android:insetLeft="5dp"
             android:insetRight="5dp"
             android:text="@string/mapButtonText"

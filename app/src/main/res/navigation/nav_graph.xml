@@ -26,8 +26,8 @@
             android:id="@+id/action_listFragmentListToEditEntryFragment"
             app:destination="@id/entryFragment" />
         <action
-            android:id="@+id/action_listFragment_to_mapActivity"
-            app:destination="@id/mapActivity" />
+            android:id="@+id/action_listFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/entryFragment"
@@ -38,9 +38,13 @@
             android:name="journalId"
             app:argType="integer" />
     </fragment>
-    <activity
-        android:id="@+id/mapActivity"
-        android:name="com.example.finalassignment.MapActivity"
-        android:label="activity_map"
-        tools:layout="@layout/activity_map" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.finalassignment.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+    </fragment>
 </navigation>

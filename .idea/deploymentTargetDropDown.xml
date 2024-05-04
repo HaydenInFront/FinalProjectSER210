@@ -2,16 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="EntryFragmentTest">
+        <State />
+      </entry>
       <entry key="JournalAdapterTest">
         <State />
       </entry>
-      <entry key="JournalDaoTest">
+      <entry key="ListFragmentTest">
         <State />
       </entry>
-      <entry key="JournalRoomDatabaseTest">
+      <entry key="MapFragmentTest">
         <State />
       </entry>
-      <entry key="JournalViewModelTest">
+      <entry key="MenuFragmentTest">
         <State />
       </entry>
       <entry key="app">

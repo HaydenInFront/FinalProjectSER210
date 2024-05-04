@@ -13,7 +13,7 @@ import com.example.finalassignment.databinding.FragmentListBinding
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private val viewModel: JournalViewModel by activityViewModels {
         JournalViewModelFactory(
@@ -48,7 +48,7 @@ class ListFragment : Fragment() {
         val mapButton = binding.mapButton
 
         mapButton.setOnClickListener {
-            view.findNavController().navigate(R.id.action_listFragment_to_mapActivity)
+            view.findNavController().navigate(R.id.action_listFragment_to_mapFragment)
         }
 
         val addButton = binding.addButton
