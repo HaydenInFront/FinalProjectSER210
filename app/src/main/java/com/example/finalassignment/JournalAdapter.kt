@@ -16,14 +16,21 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 
+/**
+ * Adapter for the RecyclerView that displays the list of journal entries.
+ * @property onJournalClicked function to be called when a journal entry is clicked.
+ */
 class JournalAdapter(private val onJournalClicked: (Journal) -> Unit): ListAdapter<Journal, JournalAdapter.JournalViewHolder>(DiffCallback) {
-
-    var itemClickCallback: ((Journal) -> Unit)? = null
-
+    /**
+     * Called when RecyclerView needs a new ViewHolder of the given type to represent an item.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JournalViewHolder {
         return JournalViewHolder(JournalItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
+    /**
+     * Called by RecyclerView to display the data at the specified position.
+     */
     override fun onBindViewHolder(holder: JournalViewHolder, position: Int) {
         val current = getItem(position)
         holder.itemView.setOnClickListener() {
@@ -32,6 +39,9 @@ class JournalAdapter(private val onJournalClicked: (Journal) -> Unit): ListAdapt
         holder.bind(current)
     }
 
+    /**
+     * ViewHolder for the RecyclerView items.
+     */
     class JournalViewHolder(private var binding: JournalItemBinding):
         RecyclerView.ViewHolder(binding.root) {
         val apiKey = BuildConfig.PLACES_API_KEY
@@ -40,6 +50,10 @@ class JournalAdapter(private val onJournalClicked: (Journal) -> Unit): ListAdapt
         }
 
         private var placesClient = Places.createClient(binding.root.context)
+
+        /**
+         * Binds the data to the ViewHolder.
+         */
         fun bind(journal: Journal) {
             val locationId = journal.location
             val placeFields = listOf(Place.Field.NAME, Place.Field.PHOTO_METADATAS)
@@ -89,6 +103,9 @@ class JournalAdapter(private val onJournalClicked: (Journal) -> Unit): ListAdapt
         }
     }
 
+    /**
+     * Callback for calculating the diff between two non-null items in a list.
+     */
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Journal>() {
             override fun areItemsTheSame(oldItem: Journal, newItem: Journal): Boolean {

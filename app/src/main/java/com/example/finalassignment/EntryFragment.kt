@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -21,7 +20,10 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
-
+/**
+ * EntryFragment is a Fragment that allows the user to create or edit a journal entry.
+ * It uses the Google Places API to allow the user to select a location for their entry.
+ */
 class EntryFragment : Fragment() {
 
     private var _binding: FragmentEntryBinding? = null
@@ -44,24 +46,28 @@ class EntryFragment : Fragment() {
 
     lateinit var journal: Journal
 
-
-
+    /**
+     * Inflates the layout for this fragment and initializes the Google Places API.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEntryBinding.inflate(inflater, container, false)
-        
 
         val apiKey = BuildConfig.PLACES_API_KEY
         Places.initialize(requireContext(), apiKey)
 
         placesClient = Places.createClient(requireContext());
 
-        // Inflate the layout for this fragment
         return binding.root
     }
 
+    /**
+     * Sets up the view after it has been created. This includes setting up the Google Places
+     * autocomplete fragment, retrieving the journal entry if one exists, and setting up the
+     * submit and delete buttons.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -93,7 +99,6 @@ class EntryFragment : Fragment() {
                     autocompleteFragment.setText(previousEntryLocation)
                     locationId = this.journal.location
                     retrievePlace(this.journal.location)
-                    //binding.locationInput.setText(this.journal.location)
                     binding.dateInput.setText(this.journal.date)
                     binding.entryInput.setText(this.journal.entry)
                 }
@@ -117,6 +122,9 @@ class EntryFragment : Fragment() {
         }
     }
 
+    /**
+     * Retrieves the place details for a given location ID.
+     */
     private fun retrievePlace(locationId: String) {
         val placeFields = listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
         val request = FetchPlaceRequest.newInstance(locationId, placeFields)
@@ -129,11 +137,13 @@ class EntryFragment : Fragment() {
         }.addOnFailureListener { exception ->
             if (exception is ApiException) {
                 Log.e(TAG, "Place not found: ${exception.message}")
-                //val statusCode = exception.statusCode
             }
         }
     }
 
+    /**
+     * Updates an existing journal entry.
+     */
     private fun updateItem() {
         if (isEntryValid()) {
             viewModel.updateJournal(
@@ -141,7 +151,6 @@ class EntryFragment : Fragment() {
                     journalId,
                     binding.titleInput.text.toString(),
                     locationId,
-                    //binding.locationInput.text.toString(),
                     binding.dateInput.text.toString(),
                     binding.entryInput.text.toString()
                 )
@@ -149,32 +158,38 @@ class EntryFragment : Fragment() {
         }
     }
 
+    /**
+     * Cleans up when the view is destroyed.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
 
-        // Hide the keyboard
         val inputMethodManager = requireActivity().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as
                 android.view.inputmethod.InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
         _binding = null
     }
 
+    /**
+     * Checks if the user's input is valid.
+     */
     private fun isEntryValid() : Boolean{
         return viewModel.isEntryValid(
             binding.titleInput.text.toString(),
             locationId,
-            //binding.locationInput.text.toString(),
             binding.dateInput.text.toString(),
             binding.entryInput.text.toString()
         )
     }
 
+    /**
+     * Adds a new journal entry.
+     */
     private fun addNewItem() {
         if (isEntryValid()) {
             viewModel.addNewJournal(
                 binding.titleInput.text.toString(),
                 locationId,
-                //binding.locationInput.text.toString(),
                 binding.dateInput.text.toString(),
                 binding.entryInput.text.toString()
             )
